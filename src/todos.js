@@ -1,6 +1,6 @@
 import { compareAsc, format } from "date-fns";
 
-const todos = function (
+default export const todos = function (
   title,
   desc = "no description",
   dueDate = "none",
