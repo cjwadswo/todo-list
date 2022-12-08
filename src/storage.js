@@ -1,14 +1,17 @@
-let storeData = function () {
+let storage = function () {
   let projectData = [];
-  let addProject = function (product) {
-    projectData.push(product);
+  const addProject = function (project) {
+    projectData.push(project);
   };
-  let removeProject = function (product) {
-    let indexOfProduct = projectData.indexOf(product);
-    projectData = projectData.splice(indexOfProduct, 1);
+  const removeProject = function (project) {
+    let indexOfProject = projectData.indexOf(project);
+    projectData = projectData.splice(indexOfProject, 1);
+  };
+  const getProjects = () => {
+    return projectData;
   };
 
   return { projectData, addProject, removeProject };
 };
 
-export default storeData;
+export default storage;

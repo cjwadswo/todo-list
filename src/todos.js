@@ -1,6 +1,6 @@
-import { compareAsc, format } from "date-fns";
+// import { compareAsc, format } from "date-fns";
 
-default export const todos = function (
+const todo = function (
   title,
   desc = "no description",
   dueDate = "none",
@@ -13,3 +13,5 @@ default export const todos = function (
 
   return { title, desc, dueDate, priority, completed };
 };
+
+export default todo;
