@@ -1,10 +1,9 @@
 import todo from "./todos.js";
 import project from "./projects.js";
 import storage from "./storage.js";
-
-const controller = function () {
-  let projectData = storage.getProjects();
-
+//a array that sorts even number
+const controller = function (data) {
+  let storage = data;
   function createTodo() {
     //Get title, desc, duedate. priorty, and completed from view.
     return todo(title, desc, dueDate, priority, completed);
@@ -12,7 +11,6 @@ const controller = function () {
 
   function createProject() {
     //Get title, desc from view
-
     return project(title, desc);
   }
 
@@ -24,4 +22,17 @@ const controller = function () {
   function addProject(project) {
     projectData.addProject(project);
   }
+
+  function removeToDo(project) {}
+
+  return {
+    storage,
+    createTodo,
+    createProject,
+    addToDo,
+    addProject,
+    removeToDo,
+  };
 };
+
+export default controller;

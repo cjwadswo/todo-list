@@ -1,5 +1,5 @@
-let storage = function () {
-  let projectData = [];
+let storage = function (project) {
+  let projectData = [project];
   const addProject = function (project) {
     projectData.push(project);
   };
@@ -11,7 +11,7 @@ let storage = function () {
     return projectData;
   };
 
-  return { projectData, addProject, removeProject };
+  return { getProjects, addProject, removeProject };
 };
 
 export default storage;

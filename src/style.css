@@ -1,0 +1,135 @@
+:root {
+  --cyan-veryLight: #cffafe;
+  --cyan-light: #67e8f9;
+  --cyan-ligher: #22d3ee;
+  --cyan-dark: #06b6d4;
+  --cyan-darker: #0ea5e9;
+  --cyan-veryDark: #0284c7;
+  font-size: 16px;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--cyan-veryLight);
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--cyan-veryDark);
+}
+
+.navbar {
+  background-color: var(--cyan-darker);
+  height: 100vh;
+  width: 20%;
+  min-width: fit-content;
+  color: var(--cyan-veryLight);
+  font-size: 2rem;
+  padding-left: 1rem;
+}
+.nav-item,
+ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  padding-top: 1rem;
+}
+a {
+  text-decoration: none;
+}
+
+.logo {
+  font-size: 3rem;
+}
+
+.todos-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.todo-items-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-item {
+  display: flex;
+}
+.todo-item > * {
+  padding-right: 1rem;
+}
+.completed {
+  padding: 5px;
+}
+
+/* test */
+#todo-list {
+  width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.priority {
+  display: flex;
+}
+
+/* input {
+  flex: 1;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  border-right: 1px solid #ddd;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  background-color: #00b894;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #009688;
+}
+
+.todo {
+  margin-bottom: 15px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.todo:last-child {
+  margin-bottom: 0;
+} */
