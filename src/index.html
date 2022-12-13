@@ -33,23 +33,24 @@
       <div id="add-todo">
         <h2>Add todo</h2>
         <form id="add-form">
-          <input type="text" id="todo-title" placeholder="Add a new todo" />
+          <input
+            type="text"
+            name="todo-title"
+            id="todo-title"
+            placeholder="Add a new todo" />
           <input
             type="text"
             id="todo-description"
+            name="todo-description"
             placeholder="Todo's description" />
-          <input type="date" id="todo-due-date" />
+          <input type="date" name="date" id="todo-due-date" />
           <div class="priority">
-            <input type="radio" id="high" name="priority" value="high" />
+            <input type="radio" id="high" name="high" value="high" />
             <label for="high">HIGH</label><br />
-            <input
-              type="radio"
-              id="medium"
-              name="fav_language"
-              value="medium" />
+            <input type="radio" id="medium" name="medium" value="medium" />
             <label for="medium">MEDIUM</label><br />
             <input type="radio" id="low" name="low" value="low" />
-            <label for="javascript">low</label>
+            <label for="low">low</label>
           </div>
           <button type="submit">Add</button>
         </form>

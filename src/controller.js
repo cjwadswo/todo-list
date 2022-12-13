@@ -7,9 +7,13 @@ const controller = function (data) {
   let storage = data;
   let viewInstance = view();
 
-  function createTodo() {
-    //Get title, desc, duedate. priorty, and completed from view.
-    return todo(title, desc, dueDate, priority, completed);
+  function createTodo(formData) {
+    let title = formData.get("todo-title");
+    let desc = formData.get("todo-description");
+    let date = formData.get("date");
+    //logic for getting priority
+    let todoItem = todo(title, desc, date);
+    addTodo(todoItem);
   }
 
   function createProject() {
@@ -17,26 +21,37 @@ const controller = function (data) {
     return project(title, desc);
   }
 
-  function addToDo(project) {
-    let todoItem = createTodo();
-    project.addToDo(todoItem);
+  function addTodo(todo) {
+    //TODO DEBUG THIS
+    storage.getProjects()[0].addTodo(todo);
+    viewInstance.addTodo(todo);
   }
 
   function addProject(project) {
-    projectData.addProject(project);
+    storage.addProject(project);
   }
 
   function removeToDo(project) {}
 
   function setup() {
     viewInstance.initialLoad(storage.getProjects()[0]);
+    addEventListeners();
+  }
+
+  function addEventListeners() {
+    const form = document.getElementById("add-form");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      createTodo(formData);
+    });
   }
 
   return {
     storage,
     createTodo,
     createProject,
-    addToDo,
+    addTodo,
     addProject,
     removeToDo,
     setup,
