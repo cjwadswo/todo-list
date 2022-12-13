@@ -15,7 +15,18 @@ const project = function (title, desc) {
     todoList.splice(indexToRemove, 1);
   };
 
-  return { projectTitle, projectDescription, todoList, addTodo, removeTodo };
+  const getTodos = function () {
+    return todoList;
+  };
+
+  return {
+    projectTitle,
+    projectDescription,
+    todoList,
+    addTodo,
+    removeTodo,
+    getTodos,
+  };
 };
 
 export default project;

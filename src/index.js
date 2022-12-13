@@ -33,4 +33,5 @@ project1.addTodo(todo2);
 project1.addTodo(todo3);
 
 let mainController = controller(defaultStorage);
+mainController.setup();
 console.log(mainController);

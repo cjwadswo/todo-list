@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="projects.js" defer></script>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -29,39 +28,32 @@
     </nav>
     <main class="todos-container">
       <h1 class="project-title">Home's project</h1>
-      <ul class="todo-items-container">
-        <li class="todo-item">
-          <input type="checkbox" class="completed"></button>
-          <div class="title">Clean Room</div>
-          <div class="description">Clean my bedroom</div>
-          <div class="due-date">12/11/2022</div>
-        </li>
+      <ul class="todo-items-container" id="todo-list"></ul>
 
-        <li class="todo-item">
-          <input type="checkbox" class="completed"></button>
-          <div class="title">Clean Room</div>
-          <div class="description">Clean my bedroom</div>
-          <div class="due-date">12/11/2022</div>
-        </li>
-      </ul>
-
-      <div id="todo-list">
+      <div id="add-todo">
         <h2>Add todo</h2>
         <form id="add-form">
           <input type="text" id="todo-title" placeholder="Add a new todo" />
-          <input type="text" id="todo-description" placeholder="Todo's description">
-          <input type="date" id="todo-due-date">
+          <input
+            type="text"
+            id="todo-description"
+            placeholder="Todo's description" />
+          <input type="date" id="todo-due-date" />
           <div class="priority">
-            <input type="radio" id="high" name="priority" value="high">
-            <label for="high">HIGH</label><br>
-            <input type="radio" id="medium" name="fav_language" value="medium">
-            <label for="medium">MEDIUM</label><br>
-            <input type="radio" id="low" name="low" value="low">
+            <input type="radio" id="high" name="priority" value="high" />
+            <label for="high">HIGH</label><br />
+            <input
+              type="radio"
+              id="medium"
+              name="fav_language"
+              value="medium" />
+            <label for="medium">MEDIUM</label><br />
+            <input type="radio" id="low" name="low" value="low" />
             <label for="javascript">low</label>
           </div>
           <button type="submit">Add</button>
         </form>
-      </div> 
+      </div>
     </main>
   </body>
 </html>
