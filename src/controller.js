@@ -6,6 +6,7 @@ import view from "./view.js";
 const controller = function (data) {
   let storage = data;
   let viewInstance = view();
+  let currentProject = storage.getProjects()[0];
 
   function createTodo(formData) {
     let title = formData.get("todo-title");
@@ -25,6 +26,7 @@ const controller = function (data) {
     if (!storage.getProjects()[0].todoExists(todo)) {
       storage.getProjects()[0].addTodo(todo);
       viewInstance.addTodo(todo);
+      addEventListeners();
     } else {
       //TODO update view to say item exists.
     }
@@ -42,11 +44,25 @@ const controller = function (data) {
   }
 
   function addEventListeners() {
+    //Create form
     const form = document.getElementById("add-form");
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       const formData = new FormData(form);
       createTodo(formData);
+    });
+
+    //Delete
+    const trash = document.getElementsByClassName("trash");
+    [...trash].forEach((button) => {
+      button.addEventListener("click", (event) => {
+        //Remove that todoItem
+        //REFACTOR
+        let trashIndex = [...trash].indexOf(button);
+        let todoToRemove = trash[trashIndex].parentNode;
+        todoToRemove.parentNode.removeChild(todoToRemove);
+        currentProject.removeTodo(trashIndex);
+      });
     });
   }
 

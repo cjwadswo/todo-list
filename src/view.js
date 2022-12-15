@@ -26,6 +26,7 @@ const view = function () {
   <div class="title">${todo.title}</div>
   <div class="description">${todo.desc}</div>
   <div class="due-date">${todo.dueDate}</div>
+  <div class="trash"><i class="fa-solid fa-trash-can"></i></div>
 </li>`;
   }
 

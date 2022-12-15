@@ -20,9 +20,7 @@ const project = function (title, desc) {
     });
     return exists;
   };
-  const removeTodo = function (todoItem) {
-    let indexToRemove = todoList.indexOf(todoItem);
-    if (indexToRemove == -1) return;
+  const removeTodo = function (indexToRemove) {
     todoList.splice(indexToRemove, 1);
   };
 

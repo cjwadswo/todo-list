@@ -75,6 +75,10 @@ a {
   padding: 5px;
 }
 
+.trash {
+  cursor: pointer;
+}
+
 /* test */
 #add-todo {
   width: 500px;
