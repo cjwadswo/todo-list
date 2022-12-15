@@ -22,9 +22,12 @@ const controller = function (data) {
   }
 
   function addTodo(todo) {
-    //TODO DEBUG THIS
-    storage.getProjects()[0].addTodo(todo);
-    viewInstance.addTodo(todo);
+    if (!storage.getProjects()[0].todoExists(todo)) {
+      storage.getProjects()[0].addTodo(todo);
+      viewInstance.addTodo(todo);
+    } else {
+      //TODO update view to say item exists.
+    }
   }
 
   function addProject(project) {
