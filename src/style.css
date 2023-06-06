@@ -19,6 +19,9 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+#edit-todo {
+  filter: blur(10px);
+}
 
 body::-webkit-scrollbar {
   width: 0.25rem;
@@ -54,6 +57,7 @@ a {
 
 .todos-container {
   display: flex;
+  position: relative;
   flex: 1;
   flex-direction: column;
   /* justify-content: center; */
@@ -101,6 +105,19 @@ form {
 
 .priority {
   display: flex;
+}
+
+#edit-todo {
+  /* display: none; */
+  filter: blur(10px);
+  position: absolute;
+  filter: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid black;
 }
 
 /* input {

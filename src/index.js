@@ -7,13 +7,6 @@ import controller from "./controller.js";
 var project1 = project("Test1", "This is a test");
 let defaultStorage = storage(project1);
 let mainController = controller(defaultStorage);
-// const form = document.getElementById("add-form");
-// form.addEventListener("submit", (event) => {
-//   event.preventDefault();
-
-//   const formData = new FormData(form);
-//   console.log(formData.get("todo-title"));
-// });
 
 var todo1 = todo(
   "My first todo",
@@ -40,5 +33,7 @@ var todo3 = todo(
 project1.addTodo(todo1);
 project1.addTodo(todo2);
 project1.addTodo(todo3);
+
 mainController.setup();
-// console.log(mainController);
+console.log(project1);
+console.log("test");

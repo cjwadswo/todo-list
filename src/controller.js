@@ -26,6 +26,7 @@ const controller = function (data) {
     if (!storage.getProjects()[0].todoExists(todo)) {
       storage.getProjects()[0].addTodo(todo);
       viewInstance.addTodo(todo);
+      //Add event listeners to newly added todo
       addEventListeners();
     } else {
       //TODO update view to say item exists.
@@ -40,18 +41,17 @@ const controller = function (data) {
 
   function setup() {
     viewInstance.initialLoad(storage.getProjects()[0]);
-    addEventListeners();
-  }
-
-  function addEventListeners() {
-    //Create form
     const form = document.getElementById("add-form");
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       const formData = new FormData(form);
       createTodo(formData);
+      form.reset();
     });
+    addEventListeners();
+  }
 
+  function addEventListeners() {
     //Delete
     const trash = document.getElementsByClassName("trash");
     [...trash].forEach((button) => {
@@ -63,6 +63,12 @@ const controller = function (data) {
         todoToRemove.parentNode.removeChild(todoToRemove);
         currentProject.removeTodo(trashIndex);
       });
+    });
+
+    //TODO add edit
+    const edit = document.getElementsByClassName("edit");
+    [...edit].forEach((button) => {
+      let editIndex = [...edit].indexOf(button);
     });
   }
 

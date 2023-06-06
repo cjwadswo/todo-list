@@ -7,10 +7,11 @@ const todo = function (
   priority = "none",
   completed = "false"
 ) {
-  if (title === undefined) {
-    throw new Error("No title");
-  }
+  // if (title.trim() === "") {
+  //   throw new Error("No title");
+  // }
 
+  title = title.trim();
   return { title, desc, dueDate, priority, completed };
 };
 

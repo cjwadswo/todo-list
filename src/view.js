@@ -27,6 +27,7 @@ const view = function () {
   <div class="description">${todo.desc}</div>
   <div class="due-date">${todo.dueDate}</div>
   <div class="trash"><i class="fa-solid fa-trash-can"></i></div>
+  <div class="edit"><i class="fa-sharp fa-solid fa-pen-to-square"></i></div>
 </li>`;
   }
 
