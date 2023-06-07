@@ -26,7 +26,7 @@
         <li class="nav-item"><a href="#" class="nav-link"></a></li>
       </ul>
     </nav>
-    <main class="todos-container blur">
+    <main id="todos-container">
       <h1 class="project-title">Home's project</h1>
       <ul class="todo-items-container" id="todo-list"></ul>
 
@@ -56,33 +56,33 @@
           <button type="submit">Add</button>
         </form>
       </div>
-
-      <div id="edit-todo">
-        <h2>Edit todo</h2>
-        <form id="edit-form">
-          <input
-            type="text"
-            name="todo-title"
-            id="edit-title"
-            placeholder="Add a new todo"
-            required />
-          <input
-            type="text"
-            id="edit-description"
-            name="todo-description"
-            placeholder="Todo's description" />
-          <input type="date" name="date" id="todo-due-date" />
-          <div class="priority">
-            <input type="radio" id="high" name="high" value="high" />
-            <label for="high">HIGH</label><br />
-            <input type="radio" id="medium" name="medium" value="medium" />
-            <label for="medium">MEDIUM</label><br />
-            <input type="radio" id="low" name="low" value="low" />
-            <label for="low">low</label>
-          </div>
-          <button type="submit">Edit</button>
-        </form>
-      </div>
     </main>
+
+    <div class="hide" id="edit-todo">
+      <h2>Edit todo</h2>
+      <form id="edit-form">
+        <input
+          type="text"
+          name="todo-title"
+          id="edit-title"
+          placeholder="Add a new todo"
+          required />
+        <input
+          type="text"
+          id="edit-description"
+          name="todo-description"
+          placeholder="Todo's description" />
+        <input type="date" name="date" id="todo-due-date" />
+        <div class="priority">
+          <input type="radio" id="high" name="high" value="high" />
+          <label for="high">HIGH</label><br />
+          <input type="radio" id="medium" name="medium" value="medium" />
+          <label for="medium">MEDIUM</label><br />
+          <input type="radio" id="low" name="low" value="low" />
+          <label for="low">low</label>
+        </div>
+        <button id="edit-submit" type="submit">Edit</button>
+      </form>
+    </div>
   </body>
 </html>
