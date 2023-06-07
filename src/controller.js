@@ -8,10 +8,13 @@ const controller = function (data) {
   let storage = data;
   let viewInstance = view();
   let currentProject = storage.getProjects()[0];
+  let editIndex;
   const todoListContainer = document.getElementById("todos-container");
   const editElement = document.getElementById("edit-todo");
   const trash = document.getElementsByClassName("trash");
   const edit = document.getElementsByClassName("edit");
+  const addTodoButton = document.getElementById("add-form");
+  const editSubmitBtn = document.getElementById("edit-form");
 
   function createTodo(formData) {
     let title = formData.get("todo-title");
@@ -20,12 +23,16 @@ const controller = function (data) {
     date = format(new Date(date), "MM/dd/yyyy");
     //logic for getting priority
     let todoItem = todo(title, desc, date);
-    addTodo(todoItem);
+    return todoItem;
   }
 
   function createProject() {
     //Get title, desc from view
     return project(title, desc);
+  }
+
+  function addProject(project) {
+    storage.addProject(project);
   }
 
   function addTodo(todo) {
@@ -39,25 +46,41 @@ const controller = function (data) {
     }
   }
 
-  function addProject(project) {
-    storage.addProject(project);
-  }
-
   function removeToDo(project) {}
 
+  function editTodo(index, todoFormData) {
+    let editedTodo = createTodo(todoFormData);
+    currentProject.editTodo(index, editedTodo);
+    update();
+  }
+
+  function update() {
+    viewInstance.load(currentProject);
+    attachTodoEventListeners();
+  }
+
   function setup() {
-    viewInstance.initialLoad(storage.getProjects()[0]);
-    const addTodoButton = document.getElementById("add-form");
-    const editSubmitBtn = document.getElementById("edit-submit");
+    viewInstance.load(currentProject);
+
+    //Attach a onetime event listener to the "add" button for adding todos
     addTodoButton.addEventListener("submit", (event) => {
       event.preventDefault();
       const formData = new FormData(addTodoButton);
-      createTodo(formData);
+      let newTodo = createTodo(formData);
+      addTodo(newTodo);
       addTodoButton.reset();
     });
+
     editSubmitBtn.addEventListener("submit", (event) => {
       event.preventDefault();
+      let todoIndex = editIndex;
+      const formData = new FormData(editSubmitBtn);
+      editTodo(todoIndex, formData);
+      update();
+      toggleHide();
+      editSubmitBtn.reset();
     });
+
     attachTodoEventListeners();
   }
 
@@ -100,12 +123,11 @@ const controller = function (data) {
   }
 
   function populatEditElementData(button) {
-    let editIndex = [...edit].indexOf(button);
+    editIndex = [...edit].indexOf(button);
     let todoToEdit = edit[editIndex].parentNode;
     let oldTitle = todoToEdit.querySelector(".title").textContent;
     let oldDesc = todoToEdit.querySelector(".description").textContent;
     let oldDate = todoToEdit.querySelector(".due-date").textContent;
-    // oldDate = parse(oldDate, "yyyy-MM-dd", new Date());
     oldDate = format(new Date(oldDate), "yyyy-MM-dd");
     editElement.querySelector("#todo-due-date").value = oldDate;
     editElement.querySelector("#edit-title").value = oldTitle;

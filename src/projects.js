@@ -11,6 +11,10 @@ const project = function (title, desc) {
     todoList.push(todoItem);
   };
 
+  const editTodo = function (index, todoItem) {
+    todoList[index] = todoItem;
+  };
+
   const todoExists = function (todoItem) {
     let exists = false;
     todoList.forEach((todo) => {
@@ -33,6 +37,7 @@ const project = function (title, desc) {
     projectDescription,
     todoList,
     addTodo,
+    editTodo,
     removeTodo,
     getTodos,
     todoExists,

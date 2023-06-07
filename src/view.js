@@ -9,8 +9,9 @@ const view = function () {
 </li>`;
 
   const todoListContainer = document.getElementById("todo-list");
-  function initialLoad(project) {
+  function load(project) {
     let todos = project.getTodos();
+    todoListContainer.innerHTML = "";
     todos.forEach((todo) => {
       addTodo(todo);
     });
@@ -44,7 +45,7 @@ const view = function () {
   }
 
   return {
-    initialLoad,
+    load,
     addTodo,
   };
 };
