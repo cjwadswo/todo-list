@@ -10,11 +10,14 @@ const controller = function (data) {
   let currentProject = storage.getProjects()[0];
   const todoListContainer = document.getElementById("todos-container");
   const editElement = document.getElementById("edit-todo");
+  const trash = document.getElementsByClassName("trash");
+  const edit = document.getElementsByClassName("edit");
 
   function createTodo(formData) {
     let title = formData.get("todo-title");
     let desc = formData.get("todo-description");
     let date = formData.get("date");
+    date = format(new Date(date), "MM/dd/yyyy");
     //logic for getting priority
     let todoItem = todo(title, desc, date);
     addTodo(todoItem);
@@ -30,7 +33,7 @@ const controller = function (data) {
       currentProject.addTodo(todo);
       viewInstance.addTodo(todo);
       //Add event listeners to newly added todo
-      addEventListeners();
+      attachTodoEventListeners();
     } else {
       //TODO update view to say item exists.
     }
@@ -44,21 +47,28 @@ const controller = function (data) {
 
   function setup() {
     viewInstance.initialLoad(storage.getProjects()[0]);
-    const form = document.getElementById("add-form");
+    const addTodoButton = document.getElementById("add-form");
     const editSubmitBtn = document.getElementById("edit-submit");
-    form.addEventListener("submit", (event) => {
+    addTodoButton.addEventListener("submit", (event) => {
       event.preventDefault();
-      const formData = new FormData(form);
+      const formData = new FormData(addTodoButton);
       createTodo(formData);
-      form.reset();
+      addTodoButton.reset();
     });
-    editSubmitBtn.addEventListener("submit", (event) => {});
-    addEventListeners();
+    editSubmitBtn.addEventListener("submit", (event) => {
+      event.preventDefault();
+    });
+    attachTodoEventListeners();
   }
 
-  function addEventListeners() {
+  function attachTodoEventListeners() {
     //Delete
-    const trash = document.getElementsByClassName("trash");
+    handleTodoDeleteEventListeners();
+    //Edit
+    handleTodoEditEventListeners();
+  }
+
+  function handleTodoDeleteEventListeners() {
     [...trash].forEach((button) => {
       button.addEventListener("click", (event) => {
         //Remove that todoItem
@@ -69,30 +79,38 @@ const controller = function (data) {
         currentProject.removeTodo(trashIndex);
       });
     });
+  }
 
-    //TODO add edit
-    const edit = document.getElementsByClassName("edit");
+  function handleTodoEditEventListeners() {
+    //Attach event listeners to each edit button that is added.
     [...edit].forEach((button) => {
       button.addEventListener("click", (event) => {
         //Toggle the edit todo element to be visible.
-        editElement.classList.toggle("hide");
-        todoListContainer.classList.toggle("blur");
-        editElement.classList.toggle("keepfocus");
-        //Add an event listener to the edit-submit button
-        let editIndex = [...edit].indexOf(button);
-        let todoToEdit = edit[editIndex].parentNode;
-        let oldTitle = todoToEdit.querySelector(".title").textContent;
-        let oldDesc = todoToEdit.querySelector(".description").textContent;
-        let oldDate = todoToEdit.querySelector(".due-date").textContent;
-        oldDate = parse(oldDate, "MM/dd/yyyy", new Date());
-        oldDate = format(oldDate, "yyyy-MM-dd");
-        editElement.querySelector("#todo-due-date").value = oldDate;
-        editElement.querySelector("#edit-title").value = oldTitle;
-        editElement.querySelector("#edit-description").value = oldDesc;
+        toggleHide();
+        //Populates the edit fields of the data with the current todo's data
+        populatEditElementData(button);
       });
     });
   }
 
+  function toggleHide() {
+    editElement.classList.toggle("hide");
+    todoListContainer.classList.toggle("blur");
+    editElement.classList.toggle("keepfocus");
+  }
+
+  function populatEditElementData(button) {
+    let editIndex = [...edit].indexOf(button);
+    let todoToEdit = edit[editIndex].parentNode;
+    let oldTitle = todoToEdit.querySelector(".title").textContent;
+    let oldDesc = todoToEdit.querySelector(".description").textContent;
+    let oldDate = todoToEdit.querySelector(".due-date").textContent;
+    // oldDate = parse(oldDate, "yyyy-MM-dd", new Date());
+    oldDate = format(new Date(oldDate), "yyyy-MM-dd");
+    editElement.querySelector("#todo-due-date").value = oldDate;
+    editElement.querySelector("#edit-title").value = oldTitle;
+    editElement.querySelector("#edit-description").value = oldDesc;
+  }
   return {
     storage,
     createTodo,
