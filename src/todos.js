@@ -5,13 +5,14 @@ const todo = function (
   desc = "no description",
   dueDate = "none",
   priority = "none",
-  completed = "false"
+  completed = false
 ) {
   // if (title.trim() === "") {
   //   throw new Error("No title");
   // }
 
   title = title.trim();
+  function toggleComplete() {}
   return { title, desc, dueDate, priority, completed };
 };
 

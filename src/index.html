@@ -16,18 +16,23 @@
   <body>
     <nav class="navbar">
       <div class="logo">TODOER</div>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a href="#" class="nav-link home-link"
-            ><i class="fa-solid fa-house"></i> Home</a
-          >
-        </li>
-        <li class="nav-item"><a href="#" class="nav-link"></a></li>
-        <li class="nav-item"><a href="#" class="nav-link"></a></li>
-      </ul>
+      <div class="projects-container">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="#" class="">ALL PROJECTS</a>
+          </li>
+          <li class="nav-item"><a href="#" class="nav-link"></a></li>
+          <li class="nav-item"><a href="#" class="nav-link"></a></li>
+        </ul>
+      </div>
+      <footer>
+        <div id="new-project">
+          <i class="fa-solid fa-plus fa-beat fa-sm"></i> New project
+        </div>
+      </footer>
     </nav>
     <main id="todos-container">
-      <h1 class="project-title">Home's project</h1>
+      <h1 class="project-title">ALL PROJECTS</h1>
       <ul class="todo-items-container" id="todo-list"></ul>
 
       <div id="add-todo">
@@ -58,7 +63,7 @@
       </div>
     </main>
 
-    <div class="hide" id="edit-todo">
+    <div id="edit-todo" class="hide">
       <h2>Edit todo</h2>
       <form id="edit-form">
         <input

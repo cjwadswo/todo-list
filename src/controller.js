@@ -15,6 +15,7 @@ const controller = function (data) {
   const edit = document.getElementsByClassName("edit");
   const addTodoButton = document.getElementById("add-form");
   const editSubmitBtn = document.getElementById("edit-form");
+  const newProjectBtn = document.getElementById("new-project");
 
   function createTodo(formData) {
     let title = formData.get("todo-title");
@@ -77,8 +78,20 @@ const controller = function (data) {
       const formData = new FormData(editSubmitBtn);
       editTodo(todoIndex, formData);
       update();
-      toggleHide();
+      // toggleHide();
       editSubmitBtn.reset();
+    });
+
+    newProjectBtn.addEventListener("click", () => {
+      let inputField = document.createElement("input");
+      inputField.setAttribute("type", "text");
+      inputField.setAttribute("placeholder", "Enter project name");
+      inputField.classList.add("new-project-input");
+      newProjectBtn.parentElement.insertBefore(inputField, this.nextSibling);
+      let newProjectText = document.getElementById("new-project");
+      newProjectText.classList.add("hide");
+
+      inputField.focus();
     });
 
     attachTodoEventListeners();
