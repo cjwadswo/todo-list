@@ -3,11 +3,11 @@ import project from "./projects.js";
 import storage from "./storage.js";
 import view from "./view.js";
 import { parse, format } from "date-fns";
+import projectList from "./projectList.js";
 //a array that sorts even number
 const controller = function (data) {
-  let storage = data;
   let viewInstance = view();
-  let currentProject = storage.getProjects()[0];
+  let currentProject = data.getCurrentProject();
   let editIndex;
   const todoListContainer = document.getElementById("todos-container");
   const editElement = document.getElementById("edit-todo");
@@ -88,8 +88,9 @@ const controller = function (data) {
       inputField.setAttribute("placeholder", "Enter project name");
       inputField.classList.add("new-project-input");
       newProjectBtn.parentElement.insertBefore(inputField, this.nextSibling);
-      let newProjectText = document.getElementById("new-project");
-      newProjectText.classList.add("hide");
+      const submitButton = document.createElement("button");
+      submitButton.textContent = "Submit";
+      newProjectBtn.append(submitButton);
 
       inputField.focus();
     });

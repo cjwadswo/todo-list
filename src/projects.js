@@ -1,8 +1,7 @@
 import todo from "./todos.js";
 
-const project = function (title, desc) {
+const project = function (title) {
   let projectTitle = title;
-  let projectDescription = desc;
   let todoList = [];
 
   const addTodo = function (todoItem) {
@@ -34,7 +33,6 @@ const project = function (title, desc) {
 
   return {
     projectTitle,
-    projectDescription,
     todoList,
     addTodo,
     editTodo,
