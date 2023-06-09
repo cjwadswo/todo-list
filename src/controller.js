@@ -36,7 +36,7 @@ const controller = function (data) {
   }
 
   function addProject(project) {
-    storage.addProject(project);
+    projects.addProject(project);
   }
 
   function addTodo(todo) {
@@ -99,6 +99,7 @@ const controller = function (data) {
       //Add the project to the project list
       projects.addProject(newProject);
       //Update the view
+      viewInstance.load(projects);
 
       newProjectBtn.classList.toggle("hide");
       newProjectInput.classList.toggle("hide");

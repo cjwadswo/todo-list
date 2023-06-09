@@ -1,6 +1,6 @@
 const projectList = function () {
   let projects = [[]];
-  let currentProject = 1;
+  let currentProject = 0;
 
   const addProject = function (project) {
     projects.push(project);
