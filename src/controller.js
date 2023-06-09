@@ -64,6 +64,7 @@ const controller = function (data) {
   }
 
   function setup() {
+    projects.deleteProject(0);
     viewInstance.load(projects);
 
     //Attach a onetime event listener to the "add" button for adding todos
