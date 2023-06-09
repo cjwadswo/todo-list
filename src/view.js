@@ -1,19 +1,23 @@
 import controller from "./controller.js";
+import projectList from "./projectList.js";
 
 const view = function () {
-  const todoItemHTML = `<li class="todo-item">
-  <input type="checkbox" class="completed"></input>
-  <div class="title"></div>
-  <div class="description"></div>
-  <div class="due-date"></div>
-</li>`;
-
   const todoListContainer = document.getElementById("todo-list");
-  function load(project) {
-    let todos = project.getTodos();
+  const projectListContainer = document.getElementById("project-list");
+
+  function load(projectList) {
+    let todos = projectList.getCurrentProject().getTodos();
+    let projects = projectList.getProjects();
+    console.log(projects);
     todoListContainer.innerHTML = "";
+    projectListContainer.innerHTML = "";
+
     todos.forEach((todo) => {
       addTodo(todo);
+    });
+
+    projects.forEach((project) => {
+      addProject(project);
     });
   }
 
@@ -21,6 +25,12 @@ const view = function () {
     todoListContainer.innerHTML += generateTodoHTML(todo);
   }
 
+  function addProject(project) {
+    let liElement = document.createElement("li");
+    let textNode = document.createTextNode(`${project.projectTitle}`);
+    liElement.appendChild(textNode);
+    projectListContainer.appendChild(liElement);
+  }
   function generateTodoHTML(todo) {
     const title = sanitizeHTML(todo.title);
     const desc = sanitizeHTML(todo.desc);

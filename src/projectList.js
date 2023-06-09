@@ -1,6 +1,6 @@
 const projectList = function () {
-  let projects = [];
-  let currentProject = 0;
+  let projects = [[]];
+  let currentProject = 1;
 
   const addProject = function (project) {
     projects.push(project);
@@ -12,15 +12,20 @@ const projectList = function () {
     projects.splice(index, 1);
   };
   const changeProject = function (index) {
-    currentProject = 1;
+    currentProject = index;
   };
   const getCurrentProject = function () {
     return projects[currentProject];
   };
 
+  const getProjects = function () {
+    return projects;
+  };
+
   return {
     addProject,
     editProject,
+    getProjects,
     getCurrentProject,
     deleteProject,
     changeProject,

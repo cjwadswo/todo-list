@@ -4,10 +4,12 @@ import storage from "./storage.js";
 import view from "./view.js";
 import { parse, format } from "date-fns";
 import projectList from "./projectList.js";
+
 //a array that sorts even number
 const controller = function (data) {
   let viewInstance = view();
-  let currentProject = data.getCurrentProject();
+  let projects = data;
+  let currentProject = projects.getCurrentProject();
   let editIndex;
   const todoListContainer = document.getElementById("todos-container");
   const editElement = document.getElementById("edit-todo");
@@ -16,7 +18,8 @@ const controller = function (data) {
   const addTodoButton = document.getElementById("add-form");
   const editSubmitBtn = document.getElementById("edit-form");
   const newProjectBtn = document.getElementById("new-project");
-
+  const newProjectInput = document.getElementById("new-project-submit");
+  const newProjectSubmit = document.getElementById("new-project-submit-btn");
   function createTodo(formData) {
     let title = formData.get("todo-title");
     let desc = formData.get("todo-description");
@@ -56,12 +59,12 @@ const controller = function (data) {
   }
 
   function update() {
-    viewInstance.load(currentProject);
+    viewInstance.load(projects);
     attachTodoEventListeners();
   }
 
   function setup() {
-    viewInstance.load(currentProject);
+    viewInstance.load(projects);
 
     //Attach a onetime event listener to the "add" button for adding todos
     addTodoButton.addEventListener("submit", (event) => {
@@ -83,16 +86,21 @@ const controller = function (data) {
     });
 
     newProjectBtn.addEventListener("click", () => {
-      let inputField = document.createElement("input");
-      inputField.setAttribute("type", "text");
-      inputField.setAttribute("placeholder", "Enter project name");
-      inputField.classList.add("new-project-input");
-      newProjectBtn.parentElement.insertBefore(inputField, this.nextSibling);
-      const submitButton = document.createElement("button");
-      submitButton.textContent = "Submit";
-      newProjectBtn.append(submitButton);
+      newProjectBtn.classList.toggle("hide");
+      newProjectInput.classList.toggle("hide");
+    });
 
-      inputField.focus();
+    newProjectSubmit.addEventListener("click", () => {
+      const inputElement = document.querySelector("#new-project-submit input");
+      let projectName = inputElement.value;
+      //Create a new project
+      let newProject = project(projectName);
+      //Add the project to the project list
+      projects.addProject(newProject);
+      //Update the view
+
+      newProjectBtn.classList.toggle("hide");
+      newProjectInput.classList.toggle("hide");
     });
 
     attachTodoEventListeners();
@@ -125,7 +133,7 @@ const controller = function (data) {
         //Toggle the edit todo element to be visible.
         toggleHide();
         //Populates the edit fields of the data with the current todo's data
-        populatEditElementData(button);
+        populateEditElementData(button);
       });
     });
   }
@@ -136,7 +144,7 @@ const controller = function (data) {
     editElement.classList.toggle("keepfocus");
   }
 
-  function populatEditElementData(button) {
+  function populateEditElementData(button) {
     editIndex = [...edit].indexOf(button);
     let todoToEdit = edit[editIndex].parentNode;
     let oldTitle = todoToEdit.querySelector(".title").textContent;

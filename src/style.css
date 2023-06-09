@@ -60,13 +60,14 @@ footer {
   align-items: center;
 }
 .new-project-input {
-  flex: 1;
+  display: flex;
   box-sizing: border-box;
   justify-content: center;
   align-items: center;
   font-size: inherit;
   font-family: inherit;
   font-weight: inherit;
+
   padding: 0;
   max-width: 100%;
 }

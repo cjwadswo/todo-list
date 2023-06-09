@@ -60,5 +60,6 @@ project1.addTodo(todo3);
 
 projects.addProject(project1);
 projects.addProject(project2);
+// console.log(projects.getProjects());
 let mainController = controller(projects);
 mainController.setup();
