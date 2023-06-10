@@ -10,11 +10,14 @@ const controller = function (data) {
   let viewInstance = view();
   let projects = data;
   let currentProject = projects.getCurrentProject();
+  console.log("currentProject:", currentProject);
+  console.log("projects:", projects);
   let editIndex;
   const todoListContainer = document.getElementById("todos-container");
   const editElement = document.getElementById("edit-todo");
   const trash = document.getElementsByClassName("trash");
   const edit = document.getElementsByClassName("edit");
+  const projectsDom = document.getElementsByClassName("project");
   const addTodoButton = document.getElementById("add-form");
   const editSubmitBtn = document.getElementById("edit-form");
   const newProjectBtn = document.getElementById("new-project");
@@ -34,17 +37,27 @@ const controller = function (data) {
     //Get title, desc from view
     return project(title, desc);
   }
+  function changeProject(index) {
+    projects.changeProject(index);
+    currentProject = projects.getCurrentProject();
+    update();
+  }
 
   function addProject(project) {
     projects.addProject(project);
+    update();
+    // proj.addEventListener("click", (event) => {
+    //   changeProject(projIndex);
+    // });
   }
 
   function addTodo(todo) {
-    if (!currentProject.todoExists(todo)) {
-      currentProject.addTodo(todo);
+    if (!projects.getCurrentProject().todoExists(todo)) {
+      projects.getCurrentProject().addTodo(todo);
       viewInstance.addTodo(todo);
-      //Add event listeners to newly added todo
-      attachTodoEventListeners();
+
+      // attachTodoEventListeners();
+      update();
     } else {
       //TODO update view to say item exists.
     }
@@ -64,9 +77,7 @@ const controller = function (data) {
   }
 
   function setup() {
-    projects.deleteProject(0);
-    viewInstance.load(projects);
-
+    update();
     //Attach a onetime event listener to the "add" button for adding todos
     addTodoButton.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -82,7 +93,6 @@ const controller = function (data) {
       const formData = new FormData(editSubmitBtn);
       editTodo(todoIndex, formData);
       update();
-      // toggleHide();
       editSubmitBtn.reset();
     });
 
@@ -97,15 +107,12 @@ const controller = function (data) {
       //Create a new project
       let newProject = project(projectName);
       //Add the project to the project list
-      projects.addProject(newProject);
-      //Update the view
-      viewInstance.load(projects);
 
+      //Update the view
+      addProject(newProject);
       newProjectBtn.classList.toggle("hide");
       newProjectInput.classList.toggle("hide");
     });
-
-    attachTodoEventListeners();
   }
 
   function attachTodoEventListeners() {
@@ -113,6 +120,8 @@ const controller = function (data) {
     handleTodoDeleteEventListeners();
     //Edit
     handleTodoEditEventListeners();
+    //Add projects event listener
+    handleProjectEventListeners();
   }
 
   function handleTodoDeleteEventListeners() {
@@ -136,6 +145,17 @@ const controller = function (data) {
         toggleHide();
         //Populates the edit fields of the data with the current todo's data
         populateEditElementData(button);
+      });
+    });
+  }
+
+  function handleProjectEventListeners() {
+    console.log(projectsDom);
+    [...projectsDom].forEach((project) => {
+      project.addEventListener("click", (event) => {
+        let projIndex = [...projectsDom].indexOf(project);
+        console.log(projIndex);
+        changeProject(projIndex);
       });
     });
   }

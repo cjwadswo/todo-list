@@ -57,9 +57,12 @@ var todo6 = todo(
 project1.addTodo(todo1);
 project1.addTodo(todo2);
 project1.addTodo(todo3);
-
+project2.addTodo(todo4);
+project2.addTodo(todo5);
+project2.addTodo(todo6);
 projects.addProject(project1);
 projects.addProject(project2);
-// console.log(projects.getProjects());
+projects.deleteProject(0);
+
 let mainController = controller(projects);
 mainController.setup();

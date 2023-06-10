@@ -8,7 +8,6 @@ const view = function () {
   function load(projectList) {
     let todos = projectList.getCurrentProject().getTodos();
     let projects = projectList.getProjects();
-    console.log(projects);
     todoListContainer.innerHTML = "";
     projectListContainer.innerHTML = "";
 
@@ -27,6 +26,7 @@ const view = function () {
 
   function addProject(project) {
     let liElement = document.createElement("li");
+    liElement.classList.add("project");
     let textNode = document.createTextNode(`${project.projectTitle}`);
     liElement.appendChild(textNode);
     projectListContainer.appendChild(liElement);
