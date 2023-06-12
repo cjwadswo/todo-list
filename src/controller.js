@@ -10,8 +10,6 @@ const controller = function (data) {
   let viewInstance = view();
   let projects = data;
   let currentProject = projects.getCurrentProject();
-  console.log("currentProject:", currentProject);
-  console.log("projects:", projects);
   let editIndex;
   const todoListContainer = document.getElementById("todos-container");
   const editElement = document.getElementById("edit-todo");
@@ -46,9 +44,6 @@ const controller = function (data) {
   function addProject(project) {
     projects.addProject(project);
     update();
-    // proj.addEventListener("click", (event) => {
-    //   changeProject(projIndex);
-    // });
   }
 
   function addTodo(todo) {
@@ -74,6 +69,7 @@ const controller = function (data) {
   function update() {
     viewInstance.load(projects);
     attachTodoEventListeners();
+    saveStorage();
   }
 
   function setup() {
@@ -150,7 +146,6 @@ const controller = function (data) {
   }
 
   function handleProjectEventListeners() {
-    console.log(projectsDom);
     [...projectsDom].forEach((project) => {
       project.addEventListener("click", (event) => {
         let projIndex = [...projectsDom].indexOf(project);
@@ -177,6 +172,14 @@ const controller = function (data) {
     editElement.querySelector("#edit-title").value = oldTitle;
     editElement.querySelector("#edit-description").value = oldDesc;
   }
+
+  function saveStorage() {
+    let saveData = JSON.stringify(projects);
+    console.log(JSON.parse(saveData));
+    localStorage.setItem("projects", saveData);
+    console.log(JSON.parse(localStorage.getItem("projects")));
+  }
+
   return {
     storage,
     createTodo,

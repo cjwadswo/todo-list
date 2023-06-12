@@ -29,6 +29,7 @@ const projectList = function () {
     getCurrentProject,
     deleteProject,
     changeProject,
+    projects,
   };
 };
 
